@@ -32,11 +32,13 @@ class FortiOSDriver(NetworkDriver):
 
         if optional_args is not None:
             self.vdom = optional_args.get('fortios_vdom', None)
+            self.port = optional_args.get('port', 22)
         else:
             self.vdom = None
+            self.port = 22
 
         self.device = FortiOS(hostname, username=username, password=password,
-                              timeout=timeout, vdom=self.vdom)
+                              timeout=timeout, vdom=self.vdom, port=self.port)
         self.config_replace = False
 
     def open(self):
